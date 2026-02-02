@@ -1,21 +1,22 @@
 import OpenAI from "openai";
 import { NextResponse } from "next/server";
-import { DJ_ARCHITECT_PROMPT, AI_MODEL } from "./constants/llm-constants";
+import { djArchitectPromptCreator, AI_MODEL } from "./constants/llm-constants";
 
 const client = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 }
 );
 
-export async function GET() {
+export async function getSetJson(userPrompt: String) {
     try {
+      const aiPromptString = djArchitectPromptCreator(userPrompt)
       const response = await client.responses.create({
         model: AI_MODEL,
-        input: DJ_ARCHITECT_PROMPT,
+        input: aiPromptString,
       });
   
       return NextResponse.json({
-        text: response.output_text,
+        setJson: response.output_text,
       });
     } catch (error) {
       console.error(error);
