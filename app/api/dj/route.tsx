@@ -4,7 +4,7 @@ import { getSetJson } from "../../../backend/llm_service/llm-service"
 export async function POST(req: Request) {
     try {
         const requestBody = await req.json()
-        const responseSetJson = await getSetJson(requestBody.prompt)
+        const responseSetJson = await getSetJson(requestBody.trimedPrompt)
 
         const responseSetJsonBody = await responseSetJson.json()
 
