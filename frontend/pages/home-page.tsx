@@ -12,22 +12,25 @@ export default function HomePage() {
     const { setSetResult } = useSetStore();
     const router = useRouter();
 
-    const handleSubmit = async () => {
-        const trimedPrompt = prompt.trim();
-        setLoading(true)
+const handleSubmit = async () => {
+    const trimedPrompt = prompt.trim();
+    setLoading(true);
 
-        const res = await fetch("/api/dj", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ trimedPrompt }),
-        });
+    const res = await fetch("/api/dj", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ trimedPrompt }),
+    });
 
-        const data = await res.json();
+    const data = await res.json();
+    console.log(data);
+    setSetResult(data);
     
-        setSetResult(data)
-        setLoading(false)
-        router.push("/results")
-    };
+    setTimeout(() => {
+        setLoading(false);
+        router.push("/results");
+    }, 100);
+};
 
     return (
         <main className="flex h-screen flex-col items-center justify-center bg-white spaceGrotesk">
