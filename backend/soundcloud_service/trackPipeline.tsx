@@ -1,5 +1,7 @@
 import { DJSetConfig, Track } from "@/constants/constants";
 
+const MAX_DURATION = 5 * 60 * 1000
+
 export function normalizeTrack(track: any): Track {
     return {
         id: track.id,
@@ -26,12 +28,13 @@ export function normalizeTrack(track: any): Track {
 
 export function filterTrack(track: any, config: DJSetConfig) {
     const title = track.title.toLowerCase();
+    console.log(config);
 
     if (title.includes("mix") || title.includes("set") || title.includes("live")) {
         return false;
     }
 
-    if (track.duration < config.constraints.min_track_duration) {
+    if (track.duration > MAX_DURATION || track.duration < config.constraints.min_track_duration) {
         return false;
     }
 
