@@ -13,9 +13,6 @@
 # testing
 /coverage
 
-# AI Prompt info
-llm-constants.tsx
-
 # next.js
 /.next/
 /out/
