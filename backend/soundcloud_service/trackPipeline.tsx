@@ -28,7 +28,6 @@ export function normalizeTrack(track: any): Track {
 
 export function filterTrack(track: any, config: DJSetConfig) {
     const title = track.title.toLowerCase();
-    console.log(config);
 
     if (title.includes("mix") || title.includes("set") || title.includes("live")) {
         return false;
